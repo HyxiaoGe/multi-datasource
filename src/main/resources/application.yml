@@ -1,0 +1,33 @@
+server:
+    port: 8080
+spring:
+    profiles.active: dev
+    application.name: multi-datasource
+    primary-datasource:
+        jdbc-url: jdbc:mysql://localhost:3306/db1?useUnicode=true&characterEncoding=UTF-8&useTimezone=true&serverTimezone=GMT%2B8
+        username: root
+        password: root
+        driver-class-name: com.mysql.cj.jdbc.Driver
+    second-datasource:
+        jdbc-url: jdbc:mysql://localhost:3306/db2?useUnicode=true&characterEncoding=UTF-8&useTimezone=true&serverTimezone=GMT%2B8
+        username: root
+        password: root
+        driver-class-name: com.mysql.cj.jdbc.Driver
+    jpa:
+        database: mysql
+        show-sql: false
+        open-in-view: false
+        hibernate:
+            ddl-auto: validate
+            naming:
+                physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        properties:
+            hibernate:
+                query.plan_parameter_metadata_max_size: 64
+                query.plan_cache_max_size: 128
+                generate_statistics: false
+                dialect: org.hibernate.dialect.MySQL8Dialect
+                default_schema: public
+        database-platform: org.hibernate.dialect.MySQLDialect
+
+
